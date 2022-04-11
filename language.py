@@ -20,11 +20,11 @@ def loadBook(filename):
     list=[]
     file=open(filename,"r")
     content=file.read()
-    content_split=content.split("\n")
-    #print(len(content_split))
-    for i in range(len(content_split)):
+    sentences=content.split("\n")
+    #print(len(sentences))
+    for i in range(len(sentences)):
         #for j in range(len(content_split[i])):
-        x=content_split[i].split()
+        x=sentences[i].split()
         if x: #here it returns a boolen value,only when the content is present, it appends  
             list.append(x)
     return list
