@@ -311,14 +311,26 @@ Returns: str
 '''
 def generateTextFromBigrams(count, startWords, startWordProbs, bigramProbs):
     text=""
-    i=0
-    while(i<count):
-        words=choices(startWords,weights=startWordProbs)
-        text=text+words[0]+" "
-        i=i+1
+    #i=0
+    #while(i<count):
+    words1=choices(startWords,weights=startWordProbs)
+    text += words1[0]
+    print(type(text))
+    #    i=i+1
+    list=text
+    print(type(list))
+    for i in range(count-1):
+        if list!=".":
+            if list in bigramProbs:
+                list=choices(bigramProbs[list]["words"],weights=bigramProbs[list]["probs"])[0]
+                text=text+' '+list
+        else:
+            list = choices(startWords, weights = startWordProbs)
+            text=text+' '+words1[0]
+            list=words1[0]
+    return text
     #print(str)
     #print(len(str))
-    return text
 
 
 
@@ -517,12 +529,12 @@ if __name__ == "__main__":
     test.runWeek1()
 
     ## Uncomment these for Week 2 ##
-    '''print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()'''
+    test.runWeek2()
 
 
     ## Uncomment these for Week 3 ##
-    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()
+    '''print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()'''
