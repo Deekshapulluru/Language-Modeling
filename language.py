@@ -373,11 +373,11 @@ Parameters: 2D list of strs ; str
 Returns: None
 '''
 def graphTopNextWords(corpus, word):
-    # #word=buildBigramProbs(corpus)
-    # probs=buildBigramProbs(countUnigrams(corpus),countBigrams(corpus))
-    # #print(probs)
-    # values=getTopWords(10, probs[word]["words"], probs[word]["probs"], ignore)
-    # barPlot(values,"graphTopNextWords")
+    #word=buildBigramProbs(corpus)
+    probs=buildBigramProbs(countUnigrams(corpus),countBigrams(corpus))
+    #print(probs)
+    values=getTopWords(10, probs[word]["words"], probs[word]["probs"], ignore)
+    barPlot(values,"graphTopNextWords")
     return
 
 
