@@ -337,13 +337,13 @@ Returns: None
 '''
 def graphTop50Words(corpus):
     #print(corpus)
-    import matplotlib.pyplot as plt
-    words=buildVocabulary(corpus)
-    #print(words)
-    probs=buildUnigramProbs(words,countUnigrams(corpus),getCorpusLength(corpus))
-    values=getTopWords(50, words, probs, ignore)
-    #print(values)
-    barPlot(values,"graphTop50Words")
+    # import matplotlib.pyplot as plt
+    # words=buildVocabulary(corpus)
+    # #print(words)
+    # probs=buildUnigramProbs(words,countUnigrams(corpus),getCorpusLength(corpus))
+    # values=getTopWords(50, words, probs, ignore)
+    # #print(values)
+    # barPlot(values,"graphTop50Words")
     return
 
 
@@ -354,6 +354,11 @@ Parameters: 2D list of strs
 Returns: None
 '''
 def graphTopStartWords(corpus):
+    # words=getStartWords(corpus)
+    # print(len(words))
+    # probs=buildUnigramProbs(words,countStartWords(corpus),getCorpusLength(words))
+    # values=getTopWords(50, words, probs, ignore)
+    # barPlot(values,"graphTopStartWords")
     return
 
 
@@ -364,6 +369,11 @@ Parameters: 2D list of strs ; str
 Returns: None
 '''
 def graphTopNextWords(corpus, word):
+    # #word=buildBigramProbs(corpus)
+    # probs=buildBigramProbs(countUnigrams(corpus),countBigrams(corpus))
+    # #print(probs)
+    # values=getTopWords(10, probs[word]["words"], probs[word]["probs"], ignore)
+    # barPlot(values,"graphTopNextWords")
     return
 
 
