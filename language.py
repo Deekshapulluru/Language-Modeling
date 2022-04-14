@@ -5,6 +5,7 @@ Roll No:
 """
 
 import language_tests as test
+#from collections import Counter
 
 project = "Language" # don't edit this
 
@@ -17,7 +18,18 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
+    list=[]
+    file=open(filename,"r")
+    content=file.read()
+    sentences=content.split("\n")
+    #print(len(content_split))
+    for i in range(len(sentences)):
+        #for j in range(len(content_split[i])):
+        x=sentences[i].split()
+        if x: #here it returns a boolen value,only when the content is present, it appends  
+            list.append(x)
+    return list
+
 
 
 '''
@@ -27,7 +39,24 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    sum=0
+    # count=0
+    # for i in range (len(corpus)):
+    #     count+=len(corpus[i])
+    # return count 
+    dict={}
+    #print(len(corpus))
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]=1
+            else:
+                dict[corpus[i][j]]+=1
+    s=dict.values()
+    for k in s:
+        sum=sum+k
+    #print(sum)
+    return sum
 
 
 '''
@@ -37,7 +66,19 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    dict={}
+    list=[]
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]=1
+            else:
+                dict[corpus[i][j]]+=1
+    s=dict.keys()
+    for k in s:
+        list.append(k)
+    #print(list)
+    return list 
 
 
 '''
@@ -47,7 +88,14 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
-    return
+    dict={}
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]=1
+            else:
+                dict[corpus[i][j]]+=1
+    return dict
 
 
 '''
@@ -57,7 +105,23 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def getStartWords(corpus):
-    return
+    list=[]
+    result=[]
+    dict={}
+    for i in range(len(corpus)):
+        #for j in range(len(corpus[i])):
+        list.append(corpus[i][0])
+    for i in range(len(list)):
+        if list[i] not in dict:
+            dict[list[i]]=1
+        else:
+            dict[list[i]]+=1
+    #print(dict)
+    s=dict.keys()
+    for k in s:
+        result.append(k)
+    #print(list)
+    return result
 
 
 '''
@@ -67,7 +131,18 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    list=[]
+    dict={}
+    for i in range(len(corpus)):
+        #for j in range(len(corpus[i])):
+        list.append(corpus[i][0])
+    for i in range(len(list)):
+        if list[i] not in dict:
+            dict[list[i]]=1
+        else:
+            dict[list[i]]+=1
+    #print(dict)
+    return dict
 
 
 '''
@@ -77,7 +152,24 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
-    return
+    #print(corpus)
+    dict={}
+    for i in range(len(corpus)):
+        for j in range(0,len(corpus[i])-1):
+            #print(corpus[i][j],corpus[i][j+1])
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]={}
+                dict[corpus[i][j]][corpus[i][j+1]]=1
+            else:
+                if corpus[i][j+1] not in dict[corpus[i][j]]:
+                    dict[corpus[i][j]][corpus[i][j+1]]=1
+                else:
+                    dict[corpus[i][j]][corpus[i][j+1]]+=1
+                #dict[corpus[i][j]][corpus[i][j+1]]+=1
+        #print(dict)
+
+    #print(dict)
+    return dict
 
 
 ### WEEK 2 ###
@@ -89,6 +181,21 @@ Parameters: list of strs
 Returns: list of floats
 '''
 def buildUniformProbs(unigrams):
+    #dict={}
+    list=[]
+    #print(len(unigrams))
+    for i in range(len(unigrams)):
+        list.append(1/len(unigrams))
+    return list 
+
+
+    #    if unigrams[i] not in dict:
+    #        dict[unigrams[i]]=1
+    #s=dict.values()
+    #for k in s:
+    #    print(k/len(unigrams))
+
+
     return
 
 
@@ -99,7 +206,24 @@ Parameters: list of strs ; dict mapping strs to ints ; int
 Returns: list of floats
 '''
 def buildUnigramProbs(unigrams, unigramCounts, totalCount):
-    return
+    # list=[]
+    # list1=[]
+    # s=unigramCounts.values()
+    # for k in s:
+    #     list1.append(k)
+    # #print(len(s))
+    # for i in range(len(list1)):
+    #     list.append(list1[i]/totalCount)
+    # #print(list)
+    # return list
+    list=[]
+    for i in unigrams:
+        if i in unigramCounts:
+            list.append(unigramCounts[i]/totalCount)
+        else:
+            list.append(0)
+    return list
+
 
 
 '''
@@ -109,7 +233,26 @@ Parameters: dict mapping strs to ints ; dict mapping strs to (dicts mapping strs
 Returns: dict mapping strs to (dicts mapping strs to (lists of values))
 '''
 def buildBigramProbs(unigramCounts, bigramCounts):
-    return
+    dict={}
+    for prevWord in bigramCounts:
+        #print(bigramCounts[prevWord])
+        keys_list=[]
+        probs_list=[]
+        for key,value in bigramCounts[prevWord].items():
+            keys_list.append(key)
+            #print(keys_list)
+            #probs_list.append(value)
+        #print(probs_list)
+            probs_list.append(value/unigramCounts[prevWord])
+            #print(keys_list,probs_list)
+            temporary={}
+            temporary["words"]=keys_list
+            temporary["probs"]=probs_list
+            #print(temporary)
+        dict[prevWord]=temporary
+    #print(dict)
+    return dict
+
 
 
 '''
@@ -119,9 +262,25 @@ Parameters: int ; list of strs ; list of floats ; list of strs
 Returns: dict mapping strs to floats
 '''
 def getTopWords(count, words, probs, ignoreList):
-    return
+    dict={}
+    dict1={}
+    for i in range(len(words)):
+        if words[i] not in ignoreList:
+            dict[words[i]]=probs[i]
+    #print(dict)
+    #x=Counter(dict)
+    sort=sorted(dict.items(),key=lambda k: -k[1])
+    #print(sort)-it is a list
+    i=0
+    while(i<count):
+        #if sort[i][0] not in ignoreList:
+        dict1[sort[i][0]]=sort[i][1]
+        i=i+1
+    #print(dict1)
+    return dict1 
 
-
+#assert(getTopWords(2, [ "hello", "world", "again"], [2/5, 2/5, 1/5], []) == \
+#        { "hello" : 2/5, "world" : 2/5 })
 '''
 generateTextFromUnigrams(count, words, probs)
 #5 [Check6-2]
@@ -130,7 +289,15 @@ Returns: str
 '''
 from random import choices
 def generateTextFromUnigrams(count, words, probs):
-    return
+    sentence=""
+    i=0
+    while(i<count):
+        s=choices(words,weights=probs)
+        sentence=sentence+" "+s[0]
+        i=i+1
+    #print(sentence)
+    #print(len(sentence))
+    return sentence
 
 
 '''
@@ -284,6 +451,7 @@ def scatterPlot(xs, ys, labels, title):
 ### RUN CODE ###
 
 # This code runs the test cases to check your work
+
 if __name__ == "__main__":
     print("\n" + "#"*15 + " WEEK 1 TESTS " +  "#" * 16 + "\n")
     test.week1Tests()
@@ -291,12 +459,12 @@ if __name__ == "__main__":
     test.runWeek1()
 
     ## Uncomment these for Week 2 ##
-"""
+
     print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
     print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
     test.runWeek2()
-"""
+
 
     ## Uncomment these for Week 3 ##
 """
