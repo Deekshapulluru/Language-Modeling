@@ -17,7 +17,18 @@ Parameters: str
 Returns: 2D list of strs
 '''
 def loadBook(filename):
-    return
+    list=[]
+    file=open(filename,"r")
+    content=file.read()
+    sentences=content.split("\n")
+    #print(len(content_split))
+    for i in range(len(sentences)):
+        #for j in range(len(content_split[i])):
+        x=sentences[i].split()
+        if x: #here it returns a boolen value,only when the content is present, it appends  
+            list.append(x)
+    return list
+
 
 
 '''
@@ -27,7 +38,24 @@ Parameters: 2D list of strs
 Returns: int
 '''
 def getCorpusLength(corpus):
-    return
+    sum=0
+    # count=0
+    # for i in range (len(corpus)):
+    #     count+=len(corpus[i])
+    # return count 
+    dict={}
+    #print(len(corpus))
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]=1
+            else:
+                dict[corpus[i][j]]+=1
+    s=dict.values()
+    for k in s:
+        sum=sum+k
+    #print(sum)
+    return sum
 
 
 '''
@@ -37,7 +65,19 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def buildVocabulary(corpus):
-    return
+    dict={}
+    list=[]
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]=1
+            else:
+                dict[corpus[i][j]]+=1
+    s=dict.keys()
+    for k in s:
+        list.append(k)
+    #print(list)
+    return list 
 
 
 '''
@@ -47,7 +87,14 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countUnigrams(corpus):
-    return
+    dict={}
+    for i in range(len(corpus)):
+        for j in range(len(corpus[i])):
+            if corpus[i][j] not in dict:
+                dict[corpus[i][j]]=1
+            else:
+                dict[corpus[i][j]]+=1
+    return dict
 
 
 '''
@@ -57,7 +104,23 @@ Parameters: 2D list of strs
 Returns: list of strs
 '''
 def getStartWords(corpus):
-    return
+    list=[]
+    result=[]
+    dict={}
+    for i in range(len(corpus)):
+        #for j in range(len(corpus[i])):
+        list.append(corpus[i][0])
+    for i in range(len(list)):
+        if list[i] not in dict:
+            dict[list[i]]=1
+        else:
+            dict[list[i]]+=1
+    #print(dict)
+    s=dict.keys()
+    for k in s:
+        result.append(k)
+    #print(list)
+    return result
 
 
 '''
@@ -67,7 +130,18 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to ints
 '''
 def countStartWords(corpus):
-    return
+    list=[]
+    dict={}
+    for i in range(len(corpus)):
+        #for j in range(len(corpus[i])):
+        list.append(corpus[i][0])
+    for i in range(len(list)):
+        if list[i] not in dict:
+            dict[list[i]]=1
+        else:
+            dict[list[i]]+=1
+    #print(dict)
+    return dict
 
 
 '''
@@ -77,6 +151,7 @@ Parameters: 2D list of strs
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def countBigrams(corpus):
+    
     return
 
 
