@@ -26,8 +26,10 @@ def loadBook(filename):
     for i in range(len(sentences)):
         #for j in range(len(content_split[i])):
         x=sentences[i].split()
+        #print(x)
         if x: #here it returns a boolen value,only when the content is present, it appends  
             list.append(x)
+    #print(list)
     return list
 
 
@@ -315,10 +317,10 @@ def generateTextFromBigrams(count, startWords, startWordProbs, bigramProbs):
     #while(i<count):
     words1=choices(startWords,weights=startWordProbs)
     text += words1[0]
-    print(type(text))
+    #print(type(text))
     #    i=i+1
     list=text
-    print(type(list))
+    #print(type(list))
     for i in range(count-1):
         if list!=".":
             if list in bigramProbs:
@@ -413,6 +415,7 @@ def setupChartData(corpus1, corpus2, topWordCount):
     list_1=list(values1.keys())
     #print(list_1)
     corpus1_probs=buildUnigramProbs(list_1,countUnigrams(corpus1),getCorpusLength(corpus1))
+    #print(len(corpus1_probs))
     #print(s)
     corpus2_probs=buildUnigramProbs(list_1,countUnigrams(corpus2),getCorpusLength(corpus2))
     #print(s,s1)
@@ -536,5 +539,5 @@ if __name__ == "__main__":
 
 
     ## Uncomment these for Week 3 ##
-    '''print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()'''
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()
